@@ -2,10 +2,17 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
+
+
+$(function () {
+  // Code to display the current date in the header of the page.
 var today = dayjs();
 $('#currentDay').text(today.format('MMM D, YYYY'));
 
-$(function () {
+var currentTime = dayjs().format('h:mm:ss a');
+$('#currentTime').text("The current time is " + currentTime);
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -23,7 +30,6 @@ $(function () {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  // TODO: Add code to display the current date in the header of the page.
 });
 
 
@@ -41,3 +47,11 @@ $(function () {
 // THEN the text for that event is saved in local storage
 // WHEN I refresh the page
 // THEN the saved events persist
+
+//TO DO: Display 8 time blocks, with each representing 9AM until 5PM
+
+//TO DO: Color-code each time block to represent the past, pesent and future
+  //TO DO: 
+
+// TO DO: Be able to enter an event in a time block
+//TO DO: Save event to local storage 

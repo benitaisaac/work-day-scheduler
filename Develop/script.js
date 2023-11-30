@@ -1,8 +1,14 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+//Added function to run when buttons are clicked
+//Note that event listener is in the html 
 function saveClick(){
   console.log("you've pressed save");
+
+  var workEvent = document.querySelector('textarea'); //workEvent is an array now
+  localStorage.setItem("workEvent", this.workEvent.value); //store to local storage
 }
 
 

@@ -7,7 +7,7 @@
 function saveClick(){
   console.log("you've pressed save");
 
-  var workEvent = document.querySelector('textarea'); //workEvent is an array now
+  var workEvent = document.querySelector('textarea'); 
   localStorage.setItem("workEvent", this.workEvent.value); //store to local storage
 }
 

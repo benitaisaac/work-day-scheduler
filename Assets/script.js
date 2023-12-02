@@ -3,43 +3,84 @@
 // in the html.
 
 //Added function to run when buttons are clicked
-//Note that event listener is in the html 
-function saveClick(){
-  console.log("you've pressed save");
+//Note that event listener is in the html
+// function saveClick(){
+//   console.log("you've pressed save");
 
-  var workEvent = document.querySelector('textarea'); 
-  localStorage.setItem("workEvent", this.workEvent.value); //store to local storage
+//   var workEvent = document.querySelectorAll('textarea'); //workEvent is an array now
+//   console.log(workEvent.length)
+//   var tempArray = []
+//   for(let i = 0; i < workEvent.length; i++){
+//     tempArray.push(workEvent[i].value)
+//   }
+//   console.log(tempArray);
+//   localStorage.setItem("workEvent", JSON.stringify(tempArray)); //store to local storage
+// }
+
+// $(function () {
+// Code to display the current date in the header of the page.
+const now = dayjs();
+var currentTime = dayjs().format("h:mm:ss a");
+var currentHour = dayjs().hour();
+var saveButtonEl = $(".saveBtn");
+
+$("#currentDay").text(now.format("MMM D, YYYY"));
+$("#currentTime").text("The current time is " + currentTime);
+
+//work on colorcoding depending on time of day
+
+console.log(dayjs().hour()); //check whether this matches the id number for the divs
+
+// TODO: Add code to apply the past, present, or future class to each time
+// block by comparing the id to the current hour. HINTS: How can the id
+// attribute of each time-block be used to conditionally add or remove the
+// past, present, and future classes? How can Day.js be used to get the
+// current hour in 24-hour time?
+
+function checkColor() {
+  var textboxArray = $(".description"); //this returns an array with each textbox in it
+  
+  console.log(textboxArray);
+  //TO DO: loop through each textbox and add the class of 'past' 'present' or 'future' to each textarea
+  $.each(textboxArray, function () {
+    var textboxHour = $(this).parent().attr("id");
+    if (currentHour > textboxHour){
+      $(this).addClass("past");
+    } else if (currentHour == textboxHour) {
+      $(this).addClass("present");
+    } else if (currentHour < textboxHour) {
+      $(this).addClass("future");
+  }
+});
 }
 
+function savingData(event){
 
-$(function () {
-  // Code to display the current date in the header of the page.
-var today = dayjs();
-$('#currentDay').text(today.format('MMM D, YYYY'));
+}
 
-var currentTime = dayjs().format('h:mm:ss a');
-$('#currentTime').text("The current time is " + currentTime);
+// function checkInterval() {
+//   console.log("testing checkInterval Function");
+// }
 
+checkColor();
 
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-});
+setInterval(checkColor(), 60000); //testing setInterval (every second)
+saveButtonEl.on("click", savingData);
 
+// TODO: Add a listener for click events on the save button. This code should
+// use the id in the containing time-block as a key to save the user input in
+// local storage. HINT: What does `this` reference in the click listener
+// function? How can DOM traversal be used to get the "hour-x" id of the
+// time-block containing the button that was clicked? How might the id be
+// useful when saving the description in local storage?
+//
+
+//
+// TODO: Add code to get any user input that was saved in localStorage and set
+// the values of the corresponding textarea elements. HINT: How can the id
+// attribute of each time-block be used to do this?
+//
+// });
 
 //ACCEPTANCE CRITERIA
 // GIVEN I am using a daily planner to create a schedule
@@ -57,9 +98,13 @@ $('#currentTime').text("The current time is " + currentTime);
 // THEN the saved events persist
 
 //TO DO: Display 8 time blocks, with each representing 9AM until 5PM
+//TO DO: add event listeners on all save buttons
 
 //TO DO: Color-code each time block to represent the past, pesent and future
-  //TO DO: 
+//TO DO: set up a conditional
+//TO DO: if the 'hour' parameter in day.js matches the id, then the class is present
+//TO DO: if the 'hour' parameter in day.js is less than the id, then the class is past
+//TO DO: if the 'hour' parameter in jay.js is more than the id, then the class is future
 
-// TO DO: Be able to enter an event in a time block
-//TO DO: Save event to local storage 
+//TO DO: Save event to local storage
+//TO DO:

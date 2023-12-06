@@ -23,6 +23,7 @@ const now = dayjs();
 var currentTime = dayjs().format("h:mm:ss a");
 var currentHour = dayjs().hour();
 var saveButtonEl = $(".saveBtn");
+var textDescription = $(".description");
 
 $("#currentDay").text(now.format("MMM D, YYYY"));
 $("#currentTime").text("The current time is " + currentTime);
@@ -54,18 +55,29 @@ function checkColor() {
 });
 }
 
-function savingData(event){
+//TO DO: save to do items to local storage 
+function saveProjectsToStorage() {
+      var text = $(this).siblings(".description").val();
+      console.log(text);
+      localStorage.setItem($(this).parent().attr("id"), text);
+    }
 
+function getValuesFromStorage() {
+  var textboxes = $(".description");
+  $.each(textboxes, function(){
+    var id =  $(this).parent().attr("id");
+    $(this).val(localStorage.getItem(id));
+  } );
 }
 
-// function checkInterval() {
-//   console.log("testing checkInterval Function");
-// }
+  
 
 checkColor();
 
+getValuesFromStorage();
+
 setInterval(checkColor(), 60000); //testing setInterval (every second)
-saveButtonEl.on("click", savingData);
+saveButtonEl.on("click", saveProjectsToStorage);
 
 // TODO: Add a listener for click events on the save button. This code should
 // use the id in the containing time-block as a key to save the user input in

@@ -2,35 +2,17 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-//Added function to run when buttons are clicked
-//Note that event listener is in the html
-// function saveClick(){
-//   console.log("you've pressed save");
 
-//   var workEvent = document.querySelectorAll('textarea'); //workEvent is an array now
-//   console.log(workEvent.length)
-//   var tempArray = []
-//   for(let i = 0; i < workEvent.length; i++){
-//     tempArray.push(workEvent[i].value)
-//   }
-//   console.log(tempArray);
-//   localStorage.setItem("workEvent", JSON.stringify(tempArray)); //store to local storage
-// }
-
-// $(function () {
-// Code to display the current date in the header of the page.
 const now = dayjs();
 var currentTime = dayjs().format("h:mm:ss a");
 var currentHour = dayjs().hour();
 var saveButtonEl = $(".saveBtn");
 var textDescription = $(".description");
 
+//Display the current day and time at the top of the application 
 $("#currentDay").text(now.format("MMM D, YYYY"));
 $("#currentTime").text("The current time is " + currentTime);
 
-//work on colorcoding depending on time of day
-
-console.log(dayjs().hour()); //check whether this matches the id number for the divs
 
 // TODO: Add code to apply the past, present, or future class to each time
 // block by comparing the id to the current hour. HINTS: How can the id
@@ -55,7 +37,7 @@ function checkColor() {
 });
 }
 
-//TO DO: save to do items to local storage 
+//Save items to the local storage
 function saveProjectsToStorage() {
       var text = $(this).siblings(".description").val();
       console.log(text);
@@ -76,10 +58,12 @@ checkColor();
 
 getValuesFromStorage();
 
-setInterval(checkColor(), 60000); //testing setInterval (every second)
+setInterval(checkColor(), 60000);
+
+//Add a listener for click events on the save button.
 saveButtonEl.on("click", saveProjectsToStorage);
 
-// TODO: Add a listener for click events on the save button. This code should
+// TODO:  This code should
 // use the id in the containing time-block as a key to save the user input in
 // local storage. HINT: What does `this` reference in the click listener
 // function? How can DOM traversal be used to get the "hour-x" id of the

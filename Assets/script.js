@@ -1,8 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
-
 const now = dayjs();
 var currentTime = dayjs().format("h:mm:ss a");
 var currentHour = dayjs().hour();
@@ -13,18 +8,10 @@ var textDescription = $(".description");
 $("#currentDay").text(now.format("MMM D, YYYY"));
 $("#currentTime").text("The current time is " + currentTime);
 
-
-// TODO: Add code to apply the past, present, or future class to each time
-// block by comparing the id to the current hour. HINTS: How can the id
-// attribute of each time-block be used to conditionally add or remove the
-// past, present, and future classes? How can Day.js be used to get the
-// current hour in 24-hour time?
-
 function checkColor() {
   var textboxArray = $(".description"); //this returns an array with each textbox in it
-  
-  console.log(textboxArray);
-  //TO DO: loop through each textbox and add the class of 'past' 'present' or 'future' to each textarea
+
+  //Loop through each textbox and add the class of 'past' 'present' or 'future' to each textarea
   $.each(textboxArray, function () {
     var textboxHour = $(this).parent().attr("id");
     if (currentHour > textboxHour){
@@ -44,6 +31,7 @@ function saveProjectsToStorage() {
       localStorage.setItem($(this).parent().attr("id"), text);
     }
 
+//Display values in local storage
 function getValuesFromStorage() {
   var textboxes = $(".description");
   $.each(textboxes, function(){
@@ -55,52 +43,9 @@ function getValuesFromStorage() {
   
 
 checkColor();
-
 getValuesFromStorage();
-
+//Get the application to check the time every hour and update timeblocks with the appropriate color
 setInterval(checkColor(), 60000);
 
 //Add a listener for click events on the save button.
 saveButtonEl.on("click", saveProjectsToStorage);
-
-// TODO:  This code should
-// use the id in the containing time-block as a key to save the user input in
-// local storage. HINT: What does `this` reference in the click listener
-// function? How can DOM traversal be used to get the "hour-x" id of the
-// time-block containing the button that was clicked? How might the id be
-// useful when saving the description in local storage?
-//
-
-//
-// TODO: Add code to get any user input that was saved in localStorage and set
-// the values of the corresponding textarea elements. HINT: How can the id
-// attribute of each time-block be used to do this?
-//
-// });
-
-//ACCEPTANCE CRITERIA
-// GIVEN I am using a daily planner to create a schedule
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar
-// WHEN I scroll down
-// THEN I am presented with time blocks for standard business hours of 9am to 5pm
-// WHEN I view the time blocks for that day
-// THEN each time block is color-coded to indicate whether it is in the past, present, or future
-// WHEN I click into a time block
-// THEN I can enter an event
-// WHEN I click the save button for that time block
-// THEN the text for that event is saved in local storage
-// WHEN I refresh the page
-// THEN the saved events persist
-
-//TO DO: Display 8 time blocks, with each representing 9AM until 5PM
-//TO DO: add event listeners on all save buttons
-
-//TO DO: Color-code each time block to represent the past, pesent and future
-//TO DO: set up a conditional
-//TO DO: if the 'hour' parameter in day.js matches the id, then the class is present
-//TO DO: if the 'hour' parameter in day.js is less than the id, then the class is past
-//TO DO: if the 'hour' parameter in jay.js is more than the id, then the class is future
-
-//TO DO: Save event to local storage
-//TO DO:
